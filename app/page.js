@@ -1,23 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { VERTICALS, VERTICAL_KEYS } from "./lib/verticals";
-
-// ─── Receptionist persona per vertical ───
-const RECEPTIONISTS = {
-  lawyer: { name: "Jessica", photo: "https://randomuser.me/api/portraits/women/44.jpg" },
-  "real-estate": { name: "Sarah", photo: "https://randomuser.me/api/portraits/women/68.jpg" },
-  restaurant: { name: "Maria", photo: "https://randomuser.me/api/portraits/women/65.jpg" },
-  "restaurant-se": { name: "Emma", photo: "https://randomuser.me/api/portraits/women/89.jpg" },
-  dental: { name: "Rachel", photo: "https://randomuser.me/api/portraits/women/32.jpg" },
-  "vet-clinic": { name: "Amanda", photo: "https://randomuser.me/api/portraits/women/47.jpg" },
-  "home-services": { name: "Mike", photo: "https://randomuser.me/api/portraits/men/32.jpg" },
-  "property-management": { name: "Lisa", photo: "https://randomuser.me/api/portraits/women/71.jpg" },
-  insurance: { name: "David", photo: "https://randomuser.me/api/portraits/men/75.jpg" },
-  "salon-spa": { name: "Nicole", photo: "https://randomuser.me/api/portraits/women/36.jpg" },
-  hotel: { name: "Claire", photo: "https://randomuser.me/api/portraits/women/26.jpg" },
-  "home-services-qc": { name: "Sophie", photo: "https://randomuser.me/api/portraits/women/53.jpg" },
-};
+import { VERTICALS, VERTICAL_KEYS, RECEPTIONISTS } from "./lib/verticals";
 
 // ─── Industry images ───
 const IMAGES = {

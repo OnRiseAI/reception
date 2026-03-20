@@ -14,6 +14,22 @@ export const AGENT_MAP = {
   "home-services-qc": "agent_2bf41ae92b58d46ca1bf46c587", // Default: Adam
 };
 
+// Receptionist personas per vertical
+export const RECEPTIONISTS = {
+  lawyer: { name: "Jessica", photo: "https://randomuser.me/api/portraits/women/44.jpg" },
+  "real-estate": { name: "Sarah", photo: "https://randomuser.me/api/portraits/women/68.jpg" },
+  restaurant: { name: "Maria", photo: "https://randomuser.me/api/portraits/women/65.jpg" },
+  "restaurant-se": { name: "Emma", photo: "https://randomuser.me/api/portraits/women/89.jpg" },
+  dental: { name: "Rachel", photo: "https://randomuser.me/api/portraits/women/32.jpg" },
+  "vet-clinic": { name: "Amanda", photo: "https://randomuser.me/api/portraits/women/47.jpg" },
+  "home-services": { name: "Mike", photo: "https://randomuser.me/api/portraits/men/32.jpg" },
+  "property-management": { name: "Lisa", photo: "https://randomuser.me/api/portraits/women/71.jpg" },
+  insurance: { name: "David", photo: "https://randomuser.me/api/portraits/men/75.jpg" },
+  "salon-spa": { name: "Nicole", photo: "https://randomuser.me/api/portraits/women/36.jpg" },
+  hotel: { name: "Claire", photo: "https://randomuser.me/api/portraits/women/26.jpg" },
+  "home-services-qc": { name: "Sophie", photo: "https://randomuser.me/api/portraits/women/53.jpg" },
+};
+
 // Quebec Home Services voice options
 export const QC_VOICES = [
   { name: "Adam", agentId: "agent_2bf41ae92b58d46ca1bf46c587", gender: "male", photo: "/voices/adam.jpg" },

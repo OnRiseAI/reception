@@ -40,7 +40,7 @@ function MicOffIcon({ className }) {
   );
 }
 
-export default function CallWidget({ agentId, businessName, vertical, title, description, sampleQuestions = [], extraVariables = {}, onCallEnded = null }) {
+export default function CallWidget({ agentId, businessName, vertical, title, description, sampleQuestions = [], extraVariables = {}, onCallEnded = null, receptionist = null }) {
   const [callState, setCallState] = useState("idle");
   const [isAgentTalking, setIsAgentTalking] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -227,15 +227,27 @@ export default function CallWidget({ agentId, businessName, vertical, title, des
         {/* IDLE */}
         {callState === "idle" && (
           <div className="text-center space-y-6">
-            <div className="relative flex items-center justify-center mx-auto w-24 h-24">
+            {/* Headshot or phone icon */}
+            <div className="relative flex items-center justify-center mx-auto w-28 h-28">
               <div className="absolute inset-0 rounded-full bg-[#10B981]/5" style={{ animation: "ring-pulse 3s ease-out infinite" }} />
               <div className="absolute inset-0 rounded-full bg-[#10B981]/5" style={{ animation: "ring-pulse 3s ease-out infinite 1.5s" }} />
-              <div className="w-16 h-16 rounded-full bg-[#10B981]/10 border border-[#10B981]/20 flex items-center justify-center">
-                <PhoneIcon className="w-6 h-6 text-[#10B981]" />
-              </div>
+              {receptionist?.photo ? (
+                <img
+                  src={receptionist.photo}
+                  alt={receptionist.name}
+                  className="w-20 h-20 rounded-full object-cover border-2 border-[#10B981]/30 shadow-[0_0_24px_rgba(16,185,129,0.12)]"
+                />
+              ) : (
+                <div className="w-16 h-16 rounded-full bg-[#10B981]/10 border border-[#10B981]/20 flex items-center justify-center">
+                  <PhoneIcon className="w-6 h-6 text-[#10B981]" />
+                </div>
+              )}
             </div>
 
             <div>
+              {receptionist?.name && (
+                <p className="text-[12px] text-[#10B981] font-medium mb-1">{receptionist.name}, AI Receptionist</p>
+              )}
               <h3 className="text-lg font-semibold text-white">{title}</h3>
               <p className="text-[13px] text-zinc-500 mt-1 max-w-[260px] mx-auto">{description}</p>
             </div>

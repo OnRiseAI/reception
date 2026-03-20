@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import CallWidget from "./CallWidget";
-import { VERTICALS, VERTICAL_KEYS, getVertical, getAgentId, QC_VOICES } from "../lib/verticals";
+import { VERTICALS, VERTICAL_KEYS, getVertical, getAgentId, QC_VOICES, RECEPTIONISTS } from "../lib/verticals";
 
 function CheckIcon({ className }) {
   return (
@@ -77,19 +77,26 @@ export default function VerticalDemo({ verticalKey, nameParam }) {
           </div>
         )}
 
-        {/* Business name */}
-        <div>
-          <label htmlFor="biz" className="text-[11px] font-semibold text-zinc-600 tracking-wide uppercase mb-2 block">
-            Business name
-          </label>
+        {/* Business name — prominent */}
+        <div className="bg-zinc-900/80 border border-zinc-800 rounded-xl p-4 space-y-3">
+          <div className="flex items-center justify-between">
+            <label htmlFor="biz" className="text-[12px] font-semibold text-zinc-400">
+              What&apos;s your business called?
+            </label>
+            <span className="text-[10px] text-[#10B981] font-medium">The AI adapts instantly</span>
+          </div>
           <input
             id="biz"
             type="text"
             value={businessName}
             onChange={(e) => setBusinessName(e.target.value)}
-            placeholder="e.g. Smith & Associates"
-            className="w-full px-4 py-3 rounded-xl border border-zinc-800 bg-zinc-900/50 text-[15px] text-white placeholder:text-zinc-700 focus:outline-none focus:border-[#10B981]/40 focus:ring-2 focus:ring-[#10B981]/10 transition-all"
+            onFocus={(e) => e.target.select()}
+            placeholder="Type your business name here"
+            className="w-full px-4 py-3.5 rounded-xl border border-zinc-700 bg-zinc-950 text-[16px] text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#10B981]/50 focus:ring-2 focus:ring-[#10B981]/10 transition-all"
           />
+          <p className="text-[11px] text-zinc-600">
+            Replace the name above with yours — the AI will greet your callers by your business name.
+          </p>
         </div>
 
         {/* Voice picker */}
@@ -169,6 +176,7 @@ export default function VerticalDemo({ verticalKey, nameParam }) {
           description={activeConfig.description}
           sampleQuestions={activeConfig.sampleQuestions}
           extraVariables={selectedVoice ? { agent_name: selectedVoice.name } : undefined}
+          receptionist={selectedVoice ? { name: selectedVoice.name, photo: selectedVoice.photo } : RECEPTIONISTS[verticalKey]}
         />
       </div>
 
