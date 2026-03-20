@@ -3,7 +3,23 @@
 import Link from "next/link";
 import { VERTICALS, VERTICAL_KEYS } from "./lib/verticals";
 
-// ─── Industry images (Unsplash) ───
+// ─── Receptionist persona per vertical ───
+const RECEPTIONISTS = {
+  lawyer: { name: "Jessica", photo: "https://randomuser.me/api/portraits/women/44.jpg" },
+  "real-estate": { name: "Sarah", photo: "https://randomuser.me/api/portraits/women/68.jpg" },
+  restaurant: { name: "Maria", photo: "https://randomuser.me/api/portraits/women/65.jpg" },
+  "restaurant-se": { name: "Emma", photo: "https://randomuser.me/api/portraits/women/89.jpg" },
+  dental: { name: "Rachel", photo: "https://randomuser.me/api/portraits/women/32.jpg" },
+  "vet-clinic": { name: "Amanda", photo: "https://randomuser.me/api/portraits/women/47.jpg" },
+  "home-services": { name: "Mike", photo: "https://randomuser.me/api/portraits/men/32.jpg" },
+  "property-management": { name: "Lisa", photo: "https://randomuser.me/api/portraits/women/71.jpg" },
+  insurance: { name: "David", photo: "https://randomuser.me/api/portraits/men/75.jpg" },
+  "salon-spa": { name: "Nicole", photo: "https://randomuser.me/api/portraits/women/36.jpg" },
+  hotel: { name: "Claire", photo: "https://randomuser.me/api/portraits/women/26.jpg" },
+  "home-services-qc": { name: "Sophie", photo: "https://randomuser.me/api/portraits/women/53.jpg" },
+};
+
+// ─── Industry images ───
 const IMAGES = {
   lawyer: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=480&h=320&fit=crop&auto=format&q=80",
   "real-estate": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=480&h=320&fit=crop&auto=format&q=80",
@@ -102,24 +118,40 @@ export default function HomePage() {
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
         {VERTICAL_KEYS.map((key) => {
           const v = VERTICALS[key];
+          const r = RECEPTIONISTS[key];
           return (
             <Link
               key={key}
               href={`/${key}`}
               className="group block rounded-2xl overflow-hidden border border-zinc-800/80 bg-zinc-900/50 hover:border-zinc-600 transition-all duration-200 active:scale-[0.98]"
             >
-              {/* Image */}
-              <div className="h-28 sm:h-32 overflow-hidden bg-zinc-800">
+              {/* Industry image with headshot overlay */}
+              <div className="relative h-28 sm:h-36 overflow-hidden bg-zinc-800">
                 <img
                   src={IMAGES[key]}
                   alt={v.label}
-                  className="w-full h-full object-cover opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-300"
+                  className="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-300"
                   loading="lazy"
                 />
+                {/* Gradient overlay for readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/90 via-transparent to-transparent" />
+
+                {/* Headshot badge — bottom right */}
+                {r && (
+                  <div className="absolute bottom-3 right-3 flex items-center gap-2 bg-black/60 backdrop-blur-sm rounded-full pl-1 pr-3 py-1">
+                    <img
+                      src={r.photo}
+                      alt={r.name}
+                      className="w-6 h-6 rounded-full object-cover border border-white/20"
+                      loading="lazy"
+                    />
+                    <span className="text-[11px] font-medium text-white/90">{r.name}</span>
+                  </div>
+                )}
               </div>
 
-              {/* Label */}
-              <div className="px-4 py-3.5 flex items-center justify-between">
+              {/* Label + CTA */}
+              <div className="px-4 py-3.5 space-y-3">
                 <div className="flex items-center gap-2.5">
                   <span className="text-zinc-600 group-hover:text-[#10B981] transition-colors">
                     {ICONS[v.icon] || ICONS.building}
@@ -128,9 +160,16 @@ export default function HomePage() {
                     {v.label}
                   </span>
                 </div>
-                <svg className="w-4 h-4 text-zinc-700 group-hover:text-[#10B981] group-hover:translate-x-0.5 transition-all" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-                </svg>
+
+                {/* CTA button */}
+                <div className="flex items-center justify-between">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#10B981]/10 text-[#10B981] text-[12px] font-semibold group-hover:bg-[#10B981] group-hover:text-white transition-all duration-200">
+                    <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                    Talk to {r?.name || "AI"}
+                  </span>
+                </div>
               </div>
             </Link>
           );
